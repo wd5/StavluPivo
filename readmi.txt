@@ -1,0 +1,4 @@
+django
+djangoappengine
+dbindexer
+djangotoolbox  
