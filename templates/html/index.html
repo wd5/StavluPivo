@@ -1,0 +1,42 @@
+{% extends 'html/base.html'  %}
+
+{% load i18n %}
+{% block subtitle %}Ставим пиво{% endblock %}
+
+
+{% block panel %}
+<ul class="nav">
+  <li class="active"><a href="/">Главная</a></li>
+  <!--<li><a href="accounts">Рабочий кабинет.</a></li>-->
+</ul>
+{% endblock panel %}
+
+    <!-- Header -->
+
+  {% block header %}
+      <div class="inner">
+	<div class="container">
+	  <h1>Помощь без материального вознагрождения</h1>
+	  <p>Есть много людей, которые готовы помогать другим людям просто так или за символическое вознаграждение. 
+	    <lu>
+	      <li>Если Вам нужна такая помощь - Вам сюда!</li> 
+	      <li>Если Вы готовы оказывать такого рода помощь - Вам обязательно сюда!</li>
+	    </lu>
+	  </p>
+	  <h3>Данный сервис призван служить отзывчивым и просто добрым людям.</h3>
+	</div>
+      </div>
+  {% endblock header %}
+
+<!-- Content -->
+  {% block main_content %}
+      <div class="mini-layout fluid" style="height:auto; border:none;">
+	<!--<div class="mini-layout-sidebar" style="width:20%; padding:2%; height:auto;">
+	  <p>___</p>
+	</div>-->
+	<div class="mini-layout-body" style="width:92%; padding:2%;height:auto;">
+	  <h2>It works! </h2>
+	  <p> Добавление функционала будет проходить по мере его разработки.</p>
+	</div>
+      </div>
+  {% endblock main_content %}

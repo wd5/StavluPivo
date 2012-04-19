@@ -1,0 +1,49 @@
+{% load i18n %}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8"/>
+    <title>{% block subtitle %}{% endblock %}</title>
+    <meta name="description" content=""/>
+    <meta name="author" content=""/>
+
+    <link href="{{MEDIA_URL}}css/bootstrap.css" rel="stylesheet"/>
+    <link href="{{MEDIA_URL}}css/docs.css" rel="stylesheet"/>
+    <link href="{{MEDIA_URL}}css/main.css" rel="stylesheet"/>
+    <script src="{{MEDIA_URL}}js/jquery-1.4.2.min.js"></script>
+    <script src="{{MEDIA_URL}}js/bootstrap-dropdown.js"></script>
+    {% block extrahead %}
+    {% endblock extrahead %}
+  </head>
+
+  <body>    
+    <!-- Panel -->
+    <div data-scrollspy="scrollspy" class="topbar">
+      <div class="topbar-inner">
+	<div class="container">
+          <a href="#" class="brand">StavluPivo</a>
+	  {% block panel %}
+	  {% endblock panel %}
+	</div>
+      </div>
+    </div>
+    <!-- Header -->
+    <div class="container">
+      <header id="overview" class="hero-unit" style="background-color:#EEE">
+	{% block header %}
+	{% endblock header %}
+      </header>
+    </div>
+    <!-- Content -->
+    <div class="container">
+      {% block main_content %}
+      {% endblock main_content %}
+    </div>
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="container">
+	<p>Стиль bootstrap from Twitter.</p>
+      </div>
+    </footer>
+  </body>
+</html>

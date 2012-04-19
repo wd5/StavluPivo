@@ -1,0 +1,58 @@
+{% extends 'html/base.html'  %}
+
+{% load i18n %}
+{% block subtitle %}Личный кабинет{% endblock %}
+
+{% block extrahead %}
+<script>
+$(document).ready(function () {
+$('.topbar').dropdown();
+});
+</script>
+{% endblock extrahead %}
+
+{% block panel %}
+<ul class="nav">
+  <li><a href="/">Главная</a></li>
+  <li class="active"><a href=".">Рабочий кабинет.</a></li>
+  <li><a href="/accounts/wall/">Стена задач.</a></li>
+</ul>
+
+<ul class="nav secondary-nav">
+  <li class="dropdown">
+    <a id='topbar' class="dropdown-toggle" href="#">{{user.username}}</a>
+    <ul class="dropdown-menu">
+      <li>
+	<a href="/accounts/logout/">log out</a>
+      </li>
+      <li class="divider"></li>
+    </ul>
+  </li>
+</ul>
+{% endblock panel %}
+
+
+
+    <!-- Header -->
+
+  {% block header %}
+      <div class="inner">
+	<div class="container">
+	  <h2>Управление задачами.</h2>
+	  <p>На данной странице можно добавлять, удалять, группировать и т.д. свои задачи.</p>
+	</div>
+      </div>
+  {% endblock header %}
+
+<!-- Content -->
+  {% block main_content %}
+      <div class="mini-layout fluid" style="height:auto; border:none;">
+	<div class="mini-layout-sidebar" style="width:20%; padding:2%; height:auto;">
+	  Name: Username
+	  Email: m@m.m
+	</div>
+	<div class="mini-layout-body" style="width:70%; padding:2%;height:auto;">
+	  <p>Данный блок содержит непосредственно контент.</p>
+	</div>
+      </div>
+  {% endblock main_content %}

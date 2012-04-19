@@ -1,0 +1,26 @@
+{% extends "html/base.html" %}
+{% load i18n %}
+
+{% block subtitle %}Sign In{% endblock %}
+
+{% block panel %}
+<ul class="nav">
+  <li><a href="/">Главная</a></li>
+</ul>
+{% endblock panel %}
+
+
+{% block main_content %}
+
+<div class="inner mini-layout" style="width:400px; margin:10px; height:auto; float:right;">
+  <div id="login" class="ext-form">
+    <form method="post" action="">{% csrf_token %}
+      <table>
+	{{ form.as_table }}
+      </table>
+      <button type="submit" class="reg-button nofont png">Register</button>
+    </form>    
+  </div>
+</div>
+
+{% endblock %}

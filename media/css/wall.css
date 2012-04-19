@@ -1,0 +1,44 @@
+#wall {
+    position:relative;
+    width:70%; 
+    padding:2%;
+    height:auto;
+    min-height:500px;
+}
+
+.stiker {
+    background-attachment: scroll;
+    background-color: transparent;
+    background-image: url("/media/img/stiker.png");
+    background-position: 0 0;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    height: auto;
+    padding: 5%;
+    width: -moz-max-content;
+    max-width: 200px;
+    position: absolute;
+}
+
+.stiker>h1 {
+    border-bottom: 1px dotted;
+    font-size: large;
+    position: relative;
+    text-align: center;
+}
+
+#to-user {
+    position:relative;
+    border-top: 1px solid;
+    border-radius:0px;
+    text-align:right;
+}
+
+.close {
+    position: absolute;
+    right:10px;
+    top:10px;
+    height:10px;
+    width:10px;
+    cursor:pointer;
+}

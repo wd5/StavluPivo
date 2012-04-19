@@ -1,0 +1,59 @@
+{% extends "html/base.html" %}
+{% load i18n %}
+
+{% block subtitle %}Sign In{% endblock %}
+
+{% block panel %}
+<ul class="nav">
+  <li><a href="/">Главная</a></li>
+  <li><a href=".">Рабочий кабинет.</a></li>
+</ul>
+{% endblock panel %}
+
+
+{% block main_content %}
+<div class="inner mini-layout" style="width:400px; margin:10px; float:right;">
+  <div id="login" class="ext-form">
+    <h1>Sign In</h1>
+    <form method="post" action="{% url my_auth.views.login %}">{% csrf_token %}
+      {% if form.errors and not form.errors.username and not form.errors.password %}
+      <input type="hidden" name="redirect_to" value="{{redirect_to}}">
+      <div class="clearfix error">
+	<div class="input">
+	  <span class="help-inline">
+	    {% trans "Your username and password didn't match. Please try again." %}
+	  </span>
+	</div>
+      </div>
+      {% endif %}
+      <div class="clearfix {% if form.errors.username %}error{% endif %}">
+	<label for="id_username">Login: </label>
+	<div class="input">
+	  <input id="username" type="text" name="username"/>
+	  {% if errors.username %}
+	  {% for er in errors.username %}
+	  <span class="help-inline">{{er}}</span>
+	  {% endfor %}
+	  {% endif %}
+	</div>
+      </div>
+
+      <div class="clearfix {% if form.errors.password %}error{% endif %}">
+	<label for="id_password">Password: </label>
+	<div class="input">
+	  <input id="password" type="password" name="password"/>
+	  {% if errors.password %}
+	  {% for er in errors.password %}
+	  <span class="help-inline">{{er}}</span>
+	  {% endfor %}
+	  {% endif %}
+	</div>
+      </div>
+      <button style="float:right;" class="btn default" type="submit">
+	SignIn
+      </button>
+      <input type="hidden" name="next" value="{{ next }}" />
+    </form>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,67 @@
+{% extends 'html/base.html'  %}
+
+{% load i18n %}
+{% block subtitle %}Стена задач.{% endblock %}
+
+{% block extrahead %}
+    <link href="{{MEDIA_URL}}css/wall.css" rel="stylesheet"/>
+
+    <script src="{{MEDIA_URL}}js/wall.js"></script>
+{% endblock extrahead %}
+
+{% block panel %}
+<ul class="nav">
+  <li><a href="/">Главная</a></li>
+  <li><a href="/accounts/">Рабочий кабинет.</a></li>
+  <li class="active"><a href=".">Стена задач.</a></li>
+</ul>
+
+<ul class="nav secondary-nav">
+  <li class="dropdown">
+    <a id='topbar' class="dropdown-toggle" href="#">{{user.username}}</a>
+    <ul class="dropdown-menu">
+      <li>
+	<a href="/accounts/logout/">log out</a>
+      </li>
+      <li class="divider"></li>
+    </ul>
+  </li>
+</ul>
+{% endblock panel %}
+
+
+
+    <!-- Header -->
+
+  {% block header %}
+      <div class="inner">
+	<div class="container">
+	  <h2>Стена задач.</h2>
+	  <p>Данная страница содержит что-то вроде доски со стикерами.</p>
+	</div>
+      </div>
+  {% endblock header %}
+
+<!-- Content -->
+  {% block main_content %}
+      <div class="mini-layout fluid" style="height:auto; border:none;box-shadow: none;">
+	<div class="mini-layout-sidebar" style="width:20%; padding:2%; height:auto;">
+	  Name: Username
+	  Email: m@m.m
+	</div>
+	<div id="wall" class="mini-layout-body" >
+
+{% for t in tasks %}
+	  <div class="stiker" style="left:{{t.position_x}}px;top:{{t.position_y}}px">
+	    <div class="close" taskId="{{t.id}}">x</div>
+	    <h1>{{t.title}}</h1>
+	    <p>{{t.text_task}}</p>
+	    <p id="to-user">
+	      Alex
+	    </p>
+	  </div>
+{% endfor %}
+
+	</div>
+      </div>
+  {% endblock main_content %}
