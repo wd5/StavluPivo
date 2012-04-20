@@ -44,6 +44,7 @@ class SignUp(forms.ModelForm):
 
         hash = md5.md5(user.username+user.email+user.password).hexdigest()
         url = 'http://%s/accounts/registration/%s/%s/'%(settings.MAIN_HOST,user.id,hash)
+        #print url
         mail.send_mail(sender=settings.EMAIL_NOTIFICATION,
                        to=user.email,
                        subject="Подтверджение регистрации.",

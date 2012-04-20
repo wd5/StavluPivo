@@ -67,3 +67,4 @@ ROOT_URLCONF = 'urls'
 EMAIL_NOTIFICATION = 'barauskasalex@gmail.com'
 
 MAIN_HOST = 'localhost:8080'
+MAIN_HOST = 'stavlupivo.appspot.com'

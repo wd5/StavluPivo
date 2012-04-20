@@ -2,7 +2,7 @@
  
 from django.conf import settings
 
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect, HttpResponseNotFound
 from django.shortcuts import get_object_or_404, render_to_response
 from django.template import RequestContext
 from django.utils import simplejson
@@ -12,9 +12,11 @@ from my_auth.decorators import login_required
 
 from account.models import WallTask
 from my_auth.models import User
-import base64
 
 from my_auth.forms import SignUp, LoginForm
+
+import md5
+import base64
 
 @login_required
 def main_page(request):
@@ -53,7 +55,7 @@ def signup(request):
 
 def registration(request,id,hash):
     user = get_object_or_404(User,id=id)
-    if hash == md5.md5(user.username+user.email+user_password).hexdigest():
+    if hash == md5.md5(user.username+user.email+user.password).hexdigest():
         user.is_active = True
         user.save()
         request.session['my_au'] = base64.encodestring('user_id=%s;activ=%s;su=%s'%(user.id,user.is_active,user.is_superuser))
