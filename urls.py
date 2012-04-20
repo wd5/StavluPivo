@@ -11,7 +11,7 @@ from account.forms import LoginForm
 urlpatterns = patterns('',
                        (r'^$','middleware.index'),
 #                       (r'^admin/', include(admin.site.urls)),
-#                       (r'^accounts/',include('account.urls')),
+                       (r'^accounts/',include('account.urls')),
 #                       url(r'^accounts/login/$','django.contrib.auth.views.login',
 #                           { 'template_name' : 'html/login.html',
 #                             'authentication_form' : LoginForm},

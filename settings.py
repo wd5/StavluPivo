@@ -35,9 +35,9 @@ INSTALLED_APPS = (
     'autoload',
     'dbindexer',
     'my_auth',
-    
     # djangoappengine should come last, so it can override a few manage.py commands
     'djangoappengine',
+    'bootstrap_toolkit',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -63,3 +63,7 @@ ADMIN_MEDIA_PREFIX = '/media/admin/'
 TEMPLATE_DIRS = (os.path.join(os.path.dirname(__file__), 'templates'),)
 
 ROOT_URLCONF = 'urls'
+
+EMAIL_NOTIFICATION = 'barauskasalex@gmail.com'
+
+MAIN_HOST = 'localhost:8080'

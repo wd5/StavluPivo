@@ -1,3 +1,32 @@
 .errorlist>li {
     color : red;
 }
+
+.login {
+    border: 2px solid #8F8;
+    border-radius: 6px;
+}
+
+.login>h1 {
+    margin:15px 0px 0px 15px;
+    color: #595;
+}
+
+.form-fields {
+    padding-top:15px;
+    width:auto;
+    position:relative;
+    left:-20px;
+}
+
+input:focus, textarea:focus{
+    border-color:rgba(82,228,36,0.8);
+} 
+
+.modal-footer {
+    background-color: #C5FFC5;
+}
+
+header>.inner>.container {
+    width:900px;
+}

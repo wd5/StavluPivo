@@ -1,7 +1,7 @@
 {% extends 'html/base.html'  %}
 
 {% load i18n %}
-{% block subtitle %}Анкета{% endblock %}
+{% block subtitle %}Подтверждение регистрации{% endblock %}
 
 {% block extrahead %}
 <script>
@@ -14,7 +14,7 @@ $('.topbar').dropdown();
 {% block panel %}
 <ul class="nav">
   <li><a href="/">Главная</a></li>
-  <li class="active"><a href=".">Анкета</a></li>
+  <li><a href=".">Анкета</a></li>
   <!--<li><a href="/accounts/wall/">Стена задач.</a></li>-->
 </ul>
 
@@ -29,27 +29,17 @@ $('.topbar').dropdown();
     </ul>
   </li>
 </ul>
+
 {% endblock panel %}
-
-
-
     <!-- Header -->
-
   {% block header %}
       <div class="inner">
 	<div class="container">
-	  <h2>Анкета пользователя ***</h2>
-	  <p>Name: {{user.username}}</p>
-	  <p>Email: {{user.email}}</p>
+	  <h3>Ваш аккаунт не подтвержден</h3>
+	  <p>Проверьте почту. На указанный вами адрес электронной почты должно придти письмо для подтверждения регистрации.</p>
 	</div>
       </div>
   {% endblock header %}
-
 <!-- Content -->
   {% block main_content %}
-      <div class="mini-layout fluid" style="height:auto; border:none;">
-	<div class="mini-layout-body" style="width:94%; padding:2%;height:auto;">
-	  <p></p>
-	</div>
-      </div>
   {% endblock main_content %}

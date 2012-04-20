@@ -1,24 +1,54 @@
 {% extends "html/base.html" %}
 {% load i18n %}
+{% load bootstrap_toolkit %}
 
 {% block subtitle %}Sign In{% endblock %}
 
 {% block panel %}
 <ul class="nav">
   <li><a href="/">Главная</a></li>
+  <li class="active"><a href="/accounts/signup">Вход/Регистрация</a></li>
 </ul>
 {% endblock panel %}
+
+{% block header %}
+<div class="inner">
+  <div class="container">
+    <h2>Вход/Регистрация</h2>
+    <p></p>
+  </div>
+</div>
+{% endblock header %}
 
 
 {% block main_content %}
 
 <div class="inner mini-layout" style="width:400px; margin:10px; height:auto; float:right;">
-  <div id="login" class="ext-form">
-    <form method="post" action="">{% csrf_token %}
-      <table>
-	{{ form.as_table }}
-      </table>
-      <button type="submit" class="reg-button nofont png">Register</button>
+  <div class="ext-form">
+    <form method="post" class="form-horizontal login" action="">{% csrf_token %}
+      <h1>Регистрация:</h1>
+      <div class="form-fields">
+	{{ form|as_bootstrap:'horizontal'}}
+      </div>
+      <input type="hidden" name="flag" value="r" />
+      <div class="modal-footer">
+	<button type="submit" class="btn btn-success" style="">Ok</button>
+      </div>
+    </form>    
+  </div>
+</div>
+
+<div class="inner mini-layout" style="width:400px; margin:10px; height:auto; float:left;">
+  <div class="ext-form">
+    <form method="post" class="form-horizontal login" action="">{% csrf_token %}
+      <h1>Вход:</h1>
+      <div class="form-fields">
+	{{ form_login|as_bootstrap:'horizontal'}}
+      </div>
+      <input type="hidden" name="flag" value="l" />
+      <div class="modal-footer">
+	<button type="submit" class="btn btn-success" style="">Login</button>
+      </div>
     </form>    
   </div>
 </div>

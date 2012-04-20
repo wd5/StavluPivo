@@ -16,6 +16,6 @@ class User(models.Model):
     email = models.EmailField(_('e-mail address'), blank=True)
     password = models.CharField(_('password'), max_length=128, help_text=_("Use '[algo]$[salt]$[hexdigest]' or use the <a href=\"password/\">change password form</a>."))
     is_staff = models.BooleanField(_('staff status'), default=False, help_text=_("Designates whether the user can log into this admin site."))
-    is_active = models.BooleanField(_('active'), default=True, help_text=_("Designates whether this user should be treated as active. Unselect this instead of deleting accounts."))
+    is_active = models.BooleanField(_('active'), default=False, help_text=_("Designates whether this user should be treated as active. Unselect this instead of deleting accounts."))
     is_superuser = models.BooleanField(_('superuser status'), default=False, help_text=_("Designates that this user has all permissions without explicitly assigning them."))
     salt = models.IntegerField(default=0)

@@ -8,9 +8,8 @@
     <meta name="author" content=""/>
 
     <link href="{{MEDIA_URL}}css/bootstrap.css" rel="stylesheet"/>
-    <link href="{{MEDIA_URL}}css/docs.css" rel="stylesheet"/>
     <link href="{{MEDIA_URL}}css/main.css" rel="stylesheet"/>
-    <script src="{{MEDIA_URL}}js/jquery-1.4.2.min.js"></script>
+    <script src="{{MEDIA_URL}}js/jquery.min.js"></script>
     <script src="{{MEDIA_URL}}js/bootstrap-dropdown.js"></script>
     {% block extrahead %}
     {% endblock extrahead %}
@@ -18,9 +17,9 @@
 
   <body>    
     <!-- Panel -->
-    <div data-scrollspy="scrollspy" class="topbar">
-      <div class="topbar-inner">
-	<div class="container">
+    <div class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
           <a href="#" class="brand">StavluPivo</a>
 	  {% block panel %}
 	  {% endblock panel %}
