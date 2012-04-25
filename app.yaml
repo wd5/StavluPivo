@@ -6,12 +6,15 @@ threadsafe: yes
 
 builtins:
 - remote_api: on
+- django_wsgi: on
 
 inbound_services:
 - warmup
 
 libraries:
 - name: django
+  version: latest
+- name: PIL
   version: latest
 
 handlers:

@@ -1,34 +1,22 @@
 # -*- coding:utf-8 -*-
+
 from django.db import models
-from my_auth.models import User
+#from my_auth.models import User
+from django.utils.translation import ugettext as _
 
-# Create your models here.
+from google.appengine.ext import db
 
-class TaskGroup(models.Model):
-    owner = models.ForeignKey(User)
-    name = models.CharField(max_length=256, null = False)
+class Contact(models.Model):
+    foto = models.ImageField(upload_to='files/upload')
+    #foto = db.BlobProperty(required=False)
+    first_name = models.CharField(_(u'Имя'), max_length=30, blank=True)
+    phone = models.CharField(_(u'Телефон'),max_length=20, blank=False)
+    land = models.CharField(_(u'Страна'),max_length=20, blank=False)
+    city = models.CharField(_(u'Город'),max_length=20, blank=False)
 
-class Task(models.Model):
-    parent_task = models.ForeignKey('self', null = False)
-    group = models.ForeignKey(TaskGroup, null = True)
-    name = models.CharField(max_length=256, blank = True)
-    performers = models.ManyToManyField(User)                     # исполнители
+    help_types = models.CharField(_(u'Типы помощи'),max_length=64, blank=False)
+    help_description = models.TextField(_(u'Описание'), blank=True)
 
-    ## time conditions 
-    created_on = models.DateTimeField(auto_now_add=True, null=True)
-    start = models.DateTimeField(null=True)
-    stop = models.DateTimeField(null=True)
-    sheduler_stop = models.DateTimeField(null=True)               # запланированное дата остановки
-    man_minuts = models.PositiveIntegerField(null=False)
-    
-    def save(self):
-        super(Task,self).save()
-        if not self.name:
-            self.name='task_'+str(self.id)
-        
-class WallTask(models.Model):
-    owner = models.ForeignKey(User)
-    title = models.CharField(max_length=32, null = False)
-    text_task = models.TextField()
-    position_x = models.IntegerField(null=False)
-    position_y = models.IntegerField(null=False)
+    def __unicode__(self):
+        return self.first_name
+

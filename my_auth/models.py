@@ -3,6 +3,8 @@ import datetime
 from django.db import models
 from django.utils.translation import ugettext as _
 
+from account.models import Contact
+
 # Create your models here.
 class User(models.Model):
     """
@@ -19,3 +21,5 @@ class User(models.Model):
     is_active = models.BooleanField(_('active'), default=False, help_text=_("Designates whether this user should be treated as active. Unselect this instead of deleting accounts."))
     is_superuser = models.BooleanField(_('superuser status'), default=False, help_text=_("Designates that this user has all permissions without explicitly assigning them."))
     salt = models.IntegerField(default=0)
+
+    contact = models.OneToOneField(Contact,null=True)

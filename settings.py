@@ -16,6 +16,14 @@ PROJECT_ROOT = os.path.abspath(os.path.dirname(__file__))
 # Activate django-dbindexer for the default database
 DATABASES['native'] = DATABASES['default']
 DATABASES['default'] = {'ENGINE': 'dbindexer', 'TARGET': 'native'}
+#DATABASES = {
+#    'default': {
+#        'ENGINE': 'google.appengine.ext.django.backends.rdbms',
+#        'INSTANCE': 'my_project:instance1',
+#        'NAME': 'my_database',
+#        }
+#    }
+
 AUTOLOAD_SITECONF = 'indexes'
 
 SECRET_KEY = '=r-$b*8hglm+858&9t043hlm6-&6-3d3vfc4((7yd0dbrakhvi'
@@ -66,5 +74,5 @@ ROOT_URLCONF = 'urls'
 
 EMAIL_NOTIFICATION = 'barauskasalex@gmail.com'
 
-MAIN_HOST = 'localhost:8080'
+#MAIN_HOST = 'localhost:8080'
 MAIN_HOST = 'stavlupivo.appspot.com'
