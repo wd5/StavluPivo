@@ -1,0 +1,24 @@
+{% extends 'html/account-wizard/base.html'  %}
+{% load bootstrap_toolkit %}
+
+{% block subtitle %}Контактная информация{% endblock %}
+
+{% block inner_header %}
+<h2>Контактная информация</h2>
+{% endblock inner_header %}
+
+{% block main_content %}
+  <div class="ext-form">
+    <form method="post" class="form-vertical login" action="" enctype="multipart/form-data">{% csrf_token %}
+      <img class="avatar" src={% if user.contact.foto %}"/get-img/{{user.contact.foto}}"{% else %}"/media/img/default-avatar.gif"{% endif %}/>
+      <div style="float:left;margin-top:20px">
+	{{ form|as_bootstrap:'vertical'}}
+      </div>
+      <div style="clear:both"></div>
+      <div class="modal-footer">
+	<button type="submit" class="btn btn-success" style="">NEXT >></button>
+      </div>
+    </form>
+  </div>
+{% endblock main_content %}
+  

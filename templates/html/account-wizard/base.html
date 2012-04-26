@@ -1,0 +1,53 @@
+{% extends 'html/base.html'  %}
+
+{% load i18n %}
+{% load bootstrap_toolkit %}
+
+{% block subtitle %}Контактная информация{% endblock %}
+
+{% block extrahead %}
+<script>
+$(document).ready(function () {
+$('.topbar').dropdown();
+});
+</script>
+{% endblock extrahead %}
+
+{% block panel %}
+<ul class="nav">
+  <li><a href="/">Главная</a></li>
+  <li><a href="/accounts/">Анкета</a></li>
+</ul>
+
+<ul class="nav pull-right">
+  <li class="dropdown">
+    <a class="dropdown-toggle" href="#" data-toggle="dropdown">{{user.username}} <b class="caret"></b></a>
+    <ul class="dropdown-menu">
+      <li>
+	<a href="/accounts/logout/">log out</a>
+      </li>
+      <li class="divider"></li>
+    </ul>
+  </li>
+</ul>
+{% endblock panel %}
+
+
+
+    <!-- Header -->
+
+  {% block header %}
+      <div class="inner">
+	<div class="container">
+	  {% block inner_header %}
+	  {% endblock inner_header %}
+	  <p>Name: {{user.username}}</p>
+	  <p>Email: {{user.email}}</p>
+	</div>
+      </div>
+  {% endblock header %}
+
+<!-- Content -->
+  {% block main_content %}
+
+  {% endblock main_content %}

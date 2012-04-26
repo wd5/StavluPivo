@@ -1,0 +1,23 @@
+{% extends 'html/account-wizard/base.html'  %}
+{% load bootstrap_toolkit %}
+
+{% block subtitle %}Чем другие могут мне помочь{% endblock %}
+
+{% block inner_header %}
+<h2>Чем другие могут мне помочь</h2>
+{% endblock inner_header %}
+
+{% block main_content %}
+  <div class="ext-form">
+    <form method="post" class="form-horizontal login" action="">{% csrf_token %}
+      <div style="float:left;margin-top:20px">
+	{{ form|as_bootstrap:'vertical'}}
+      </div>
+      <div style="clear:both"></div>
+      <div class="modal-footer">
+	<button type="submit" class="btn btn-success" style="">Done</button>
+      </div>
+    </form>
+  </div>
+{% endblock main_content %}
+  
