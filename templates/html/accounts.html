@@ -5,16 +5,16 @@
 
 {% block extrahead %}
 <script>
-$(document).ready(function () {
-$('.topbar').dropdown();
-});
+  $(document).ready(function () {
+  $('.topbar').dropdown();
+  });
 </script>
 {% endblock extrahead %}
 
 {% block panel %}
 <ul class="nav">
   <li><a href="/">Главная</a></li>
-  <li class="active"><a href=".">Анкета</a></li>
+  <li class="active"><a href=".">Профиль</a></li>
   <!--<li><a href="/accounts/wall/">Стена задач.</a></li>-->
 </ul>
 
@@ -33,23 +33,28 @@ $('.topbar').dropdown();
 
 
 
-    <!-- Header -->
+<!-- Header -->
 
-  {% block header %}
-      <div class="inner">
-	<div class="container">
-	  <h2>Анкета пользователя ***</h2>
-	  <p>Name: {{user.username}}</p>
-	  <p>Email: {{user.email}}</p>
-	</div>
-      </div>
-  {% endblock header %}
+{% block header %}
+<div class="inner">
+  <div class="container">
+    <h2>Это Вы</h2>
+  </div>
+</div>
+{% endblock header %}
 
 <!-- Content -->
-  {% block main_content %}
-      <div class="mini-layout fluid" style="height:auto; border:none;">
-	<div class="mini-layout-body" style="width:94%; padding:2%;height:auto;">
-	  <p></p>
-	</div>
-      </div>
-  {% endblock main_content %}
+{% block main_content %}
+<div class="mini-layout fluid" style="height:auto; border:none;">
+  <div class="mini-layout-body my_layout" style="width:22%;">
+    <img class="avatar" src={% if user.contact.foto %}"/get-img/{{user.contact.foto}}"{% else %}"/media/img/default-avatar.gif"{% endif %}/>
+    <div style="clear:both"></div>
+    <p>Имя: {{user.contact.first_name}}</p>
+    <p>E-mail: {{user.email}}</p>
+    <a href="/accounts/edit">Изменить анкету</a>
+  </div>
+  <div class="mini-layout-body my_layout" style="width:60%">
+    123
+  </div>
+</div>
+{% endblock main_content %}

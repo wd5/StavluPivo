@@ -14,7 +14,12 @@ from my_auth.decorators import login_required
 from my_auth.models import User
 from my_auth.forms import SignUp, LoginForm
 
-from account.forms import ContactForm, HelpForm
+from account.models import StoreImage
+from account.forms import ContactForm, HelpForm, HelpMeForm, FullProfile
+
+from google.appengine.ext import db
+
+from get_img.views import _get_or_create_image
 
 import md5
 import base64
@@ -30,9 +35,12 @@ def main_page(request):
 
 
 def signup(request):
+    ## Функционал приостановлен
+    return render_to_response('html/fun-inactive.html',
+                                  {},
+                                  context_instance=RequestContext(request))
     form = SignUp()
-    form_login = LoginForm()
-    
+    form_login = LoginForm()    
     if request.method=='POST':
         if request.POST['flag']=='r':
             form = SignUp(request.POST)
@@ -69,24 +77,21 @@ def registration(request,id,hash):
 def set_contact(request):
     s = base64.decodestring(request.session['my_au']).split(';')[0].split('=')[1]
     u = get_object_or_404(User,id=s)
-#    if u.contact:
-#        return HttpResponseRedirect(reverse(main_page))
+    if u.contact:
+        return HttpResponseRedirect(reverse(main_page))
     if request.method=='POST':
-        form = ContactForm(request.POST)
-        #file_var=request.FILES[file_name]
-        #path = settings.SECURITY_MEDIA_ROOT+'/vars/'+str(campaign.id)+'.xls'
-        #tmp_f = open(path,'wb')
-        #tmp_f.write(file_var.read())
-        #tmp_f.close()
+        form = ContactForm(request.POST,request.FILES)
         if form.is_valid():
             form.save(u)
+            _save_avatar(request,u)
             #if request.FILES.has_key('foto'):
             #    foto = request.FILES['foto']
-            #    path = settings.MEDIA_ROOT+'/load-files/avatar-'+str(u.id)+foto.name
-            #    tmp_f = open(path,'wb')
-            #    tmp_f.write(foto.read())
-            #    tmp_f.close()
-            #    u.contact.foto=settings.MEDIA_URL+'load-files/avatar-'+str(u.id)+foto.name
+            #    name = '%s-avatar.%s'%(u.id,foto.name.split('.')[-1])
+            #    storeimage = _get_or_create_image(name) #StoreImage()
+            #    storeimage.foto = db.Blob(foto.read())
+            #    #storeimage.name = name
+            #    storeimage.put()
+            #    u.contact.foto=storeimage.name
             #    u.contact.save()
             return HttpResponseRedirect(reverse('set_help'))
     else:
@@ -106,11 +111,15 @@ def set_help(request):
     u = get_object_or_404(User,id=s)
     if not u.contact:
         return HttpResponseRedirect(reverse('set_contact'))
+    else:
+        if u.contact.help_types:
+            return HttpResponseRedirect(reverse(main_page))
     if request.method=='POST':
         form = HelpForm(request.POST,instance=u.contact)
         if form.is_valid():
             form.save()
-            return HttpResponseRedirect(reverse(main_page))
+            request.session['helpme']=True
+            return HttpResponseRedirect(reverse(set_help_me))
     else:
         form = HelpForm(instance=u.contact)
     return render_to_response('html/account-wizard/help.html',
@@ -118,3 +127,54 @@ def set_help(request):
                                        'form':form},
                                       context_instance=RequestContext(request))     
 
+@login_required
+def set_help_me(request):
+    s = base64.decodestring(request.session['my_au']).split(';')[0].split('=')[1]
+    u = get_object_or_404(User,id=s)
+    if not request.session.get('helpme',False):
+        return HttpResponseRedirect(reverse(set_contact))        
+    if not u.contact:
+        return HttpResponseRedirect(reverse('set_contact'))
+    if request.method=='POST':
+        form = HelpMeForm(request.POST,instance=u.contact)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(reverse(main_page))
+        
+    else:
+        form = HelpMeForm(instance=u.contact)
+    return render_to_response('html/account-wizard/help_me.html',
+                                      {'user': u,
+                                       'form':form},
+                                      context_instance=RequestContext(request))     
+
+@login_required
+def edit_contact(request):
+    s = base64.decodestring(request.session['my_au']).split(';')[0].split('=')[1]
+    u = get_object_or_404(User,id=s)
+    if not u.contact:
+        return HttpResponseRedirect(reverse(set_contact))
+    if request.method=='POST':
+        form = FullProfile(request.POST,instance=u.contact)
+        if form.is_valid():
+            form.save()
+            _save_avatar(request,u)
+            return HttpResponseRedirect(reverse(main_page))
+    else:
+        form = FullProfile(instance = u.contact)
+    return render_to_response('html/account-wizard/full-edit.html',
+                                      {'user': u,
+                                       'form':form
+                                       },
+                                      context_instance=RequestContext(request))     
+    
+def _save_avatar(request,user,file_name='foto'):
+    if request.FILES.has_key(file_name):
+        foto = request.FILES[file_name]
+        name = '%s-avatar.%s'%(user.id,foto.name.split('.')[-1])
+        storeimage = _get_or_create_image(name) #StoreImage()
+        storeimage.foto = db.Blob(foto.read())
+        #storeimage.name = name
+        storeimage.put()
+        user.contact.foto=storeimage.name
+        user.contact.save()

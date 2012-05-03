@@ -32,7 +32,22 @@ header>.inner>.container {
 }
 
 .avatar {
+    border: 1px solid #CCCCCC;
+    border-radius: 3px 3px 3px 3px;
     max-width:150px;
     margin:20px;
     float:left;
+}
+
+.my_layout {
+    border:solid 1px #CCC;
+    position:relative;
+    padding:2%;
+    height:auto;
+    float:left;
+    margin:2%
+}
+
+.tab-pane {
+    padding:15px;
 }
